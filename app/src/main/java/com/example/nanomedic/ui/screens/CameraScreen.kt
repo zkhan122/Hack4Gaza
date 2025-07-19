@@ -1,4 +1,4 @@
-package com.example.nanoMedic.ui.screens
+package com.example.nanomedic.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

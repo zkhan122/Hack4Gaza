@@ -37,7 +37,12 @@ android {
 
     buildFeatures {
         compose = true
+        mlModelBinding = true
     }
+
+//    aaptOptions {
+//        noCompress "tflite"
+//    }
 }
 
 kotlin {
@@ -55,6 +60,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.tensorflow.lite)
+    implementation(libs.splash.screen)
 
     testImplementation(libs.junit)
 

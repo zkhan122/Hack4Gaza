@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.nanomedic.ui.theme.NanoMedicTheme
 
 // 'MainActivity' class is the main entry point to the entire application.
@@ -19,7 +20,10 @@ import com.example.nanomedic.ui.theme.NanoMedicTheme
 class   MainActivity : ComponentActivity() {
     // 'onCreate' is called when the screen is created. This is like a constructor for a class.
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
+
         super.onCreate(savedInstanceState)
+
         enableEdgeToEdge()
 
         // 'setContent' renders the below UI inside this screen.
