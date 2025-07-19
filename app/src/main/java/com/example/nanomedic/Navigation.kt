@@ -9,7 +9,7 @@ import androidx.navigation.navArgument
 import com.example.nanomedic.ui.screens.CameraScreen
 import com.example.nanomedic.ui.screens.GuideScreen
 import com.example.nanomedic.ui.screens.CameraScreen
-import com.example.nanoMedic.ui.screens.GuideScreen
+import com.example.nanomedic.ui.screens.GuideScreen
 import com.example.nanomedic.ui.screens.LoadingScreen
 
 @Composable
