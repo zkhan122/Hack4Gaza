@@ -1,4 +1,3 @@
-// com/example/nanoMedic/ui/screens/GuideScreen.kt
 package com.example.nanomedic.ui.screens
 
 import android.content.Context
@@ -6,51 +5,52 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.nanomedic.guides.WoundGuideLookup
 import com.example.nanomedic.guides.WoundGuideJsonEntry
+import com.example.nanomedic.guides.WoundGuideLookup
 
 @Composable
 fun GuideScreen(
     woundType: String,
     onNavigateBackToCameraScreen: () -> Unit
 ) {
+    var isEnglish by remember { mutableStateOf(true) }
+
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Detailed Guide: $woundType") },
+                title = { Text("Detailed Guide") },
                 navigationIcon = {
                     IconButton(onClick = { onNavigateBackToCameraScreen() }) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Navigate Back"
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                    }
+                },
+                actions = {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(end = 12.dp)
+                    ) {
+                        Text("EN", style = MaterialTheme.typography.labelMedium)
+                        Switch(
+                            checked = !isEnglish,
+                            onCheckedChange = { isEnglish = !it },
+                            colors = SwitchDefaults.colors(
+                                checkedThumbColor = MaterialTheme.colorScheme.primary
+                            )
                         )
+                        Text("AR", style = MaterialTheme.typography.labelMedium)
                     }
                 }
             )
@@ -70,98 +70,108 @@ fun GuideScreen(
                 LazyColumn(
                     state = listState,
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
+                        .fillMaxSize()
+                        .padding(16.dp)
                 ) {
                     item {
-                        Column(
+                        Card(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(vertical = 8.dp)
+                                .padding(bottom = 16.dp),
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
                         ) {
-                            Text(
-                                text = "Wound Type: ${guide.woundType}",
-                                style = MaterialTheme.typography.headlineSmall,
-                                fontWeight = FontWeight.Bold
-                            )
-                            Spacer(Modifier.height(8.dp))
-
-                            Text(
-                                text = "Identification (English):",
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.Bold
-                            )
-                            Text(
-                                text = guide.identificationEng,
-                                style = MaterialTheme.typography.bodyLarge
-                            )
-                            Spacer(Modifier.height(8.dp))
-
-                            Text(
-                                text = "Identification (Arabic):",
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.Bold
-                            )
-                            Text(
-                                text = guide.identificationArab,
-                                style = MaterialTheme.typography.bodyLarge
-                            )
-                            Spacer(Modifier.height(16.dp))
-
-                            Text(
-                                text = "Treatment Steps (English):",
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.Bold
-                            )
-                            guide.treatmentEng.forEach { stepsMap ->
-                                stepsMap.entries.sortedBy { it.key }
-                                    .forEach { (stepKey, stepText) ->
-                                        Text(
-                                            text = "${stepKey.replace("Step-", "")}. $stepText", // Format "Step-1" to "1."
-                                            style = MaterialTheme.typography.bodyMedium,
-                                            modifier = Modifier.padding(start = 8.dp)
-                                        )
-                                    }
+                            Column(modifier = Modifier.padding(16.dp)) {
+                                Text(
+                                    text = "Wound Type:",
+                                    style = MaterialTheme.typography.titleMedium,
+                                    fontWeight = FontWeight.Bold
+                                )
+                                Text(
+                                    text = guide.woundType,
+                                    style = MaterialTheme.typography.bodyLarge
+                                )
                             }
-                            Spacer(Modifier.height(16.dp))
+                        }
 
-                            Text(
-                                text = "Treatment Steps (Arabic):",
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.Bold
-                            )
-                            guide.treatmentArab.forEach { stepsMap ->
-                                stepsMap.entries.sortedBy { it.key }
-                                    .forEach { (stepKey, stepText) ->
-                                        Text(
-                                            text = "${stepKey.replace("Step-", "")}. $stepText",
-                                            style = MaterialTheme.typography.bodyMedium,
-                                            modifier = Modifier.padding(start = 8.dp)
-                                        )
-                                    }
+                        // Identification
+                        Card(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 16.dp),
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                        ) {
+                            Column(modifier = Modifier.padding(16.dp)) {
+                                Text(
+                                    text = if (isEnglish) "Identification (English):" else "الوصف (العربية):",
+                                    style = MaterialTheme.typography.titleMedium,
+                                    fontWeight = FontWeight.Bold
+                                )
+                                Text(
+                                    text = if (isEnglish) guide.identificationEng else guide.identificationArab,
+                                    style = MaterialTheme.typography.bodyLarge
+                                )
+                            }
+                        }
+
+                        // Treatment Steps
+                        Card(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 16.dp),
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                        ) {
+                            Column(modifier = Modifier.padding(16.dp)) {
+                                Text(
+                                    text = if (isEnglish) "Treatment Steps (English):" else "خطوات العلاج (العربية):",
+                                    style = MaterialTheme.typography.titleMedium,
+                                    fontWeight = FontWeight.Bold
+                                )
+                                val treatmentList = if (isEnglish) guide.treatmentEng else guide.treatmentArab
+                                treatmentList.forEach { stepsMap ->
+                                    stepsMap.entries.sortedBy { it.key }
+                                        .forEach { (stepKey, stepText) ->
+                                            Text(
+                                                text = "${stepKey.replace("Step-", "")}. $stepText",
+                                                style = MaterialTheme.typography.bodyMedium,
+                                                modifier = Modifier.padding(start = 8.dp, bottom = 6.dp)
+                                            )
+                                        }
+                                }
                             }
                         }
                     }
                 }
             } else {
                 Box(
-                    modifier = Modifier.fillMaxWidth().height(200.dp),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    CircularProgressIndicator() // Or Text("Guide not found for $woundType")
-                    Text("Loading guide for $woundType...", modifier = Modifier.padding(top = 70.dp))
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text("Loading guide for $woundType...")
+                    }
                 }
             }
 
-
+            // Scroll fade indicators
             val isScrolledToTop by remember { derivedStateOf { listState.firstVisibleItemIndex > 0 } }
-            val isScrolledToBottom by remember { derivedStateOf { listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index != listState.layoutInfo.totalItemsCount - 1 } }
+            val isScrolledToBottom by remember {
+                derivedStateOf {
+                    listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index !=
+                            listState.layoutInfo.totalItemsCount - 1
+                }
+            }
 
             AnimatedVisibility(
                 visible = isScrolledToBottom,
                 modifier = Modifier.align(Alignment.BottomCenter),
-                enter = fadeIn(),
-                exit = fadeOut()
+                enter = fadeIn(), exit = fadeOut()
             ) {
                 Fade(isTop = false)
             }
@@ -169,8 +179,7 @@ fun GuideScreen(
             AnimatedVisibility(
                 visible = isScrolledToTop,
                 modifier = Modifier.align(Alignment.TopCenter),
-                enter = fadeIn(),
-                exit = fadeOut()
+                enter = fadeIn(), exit = fadeOut()
             ) {
                 Fade(isTop = true)
             }
