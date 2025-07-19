@@ -56,6 +56,12 @@ import com.example.nanomedic.ui.theme.NanoMedicTheme
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 import java.nio.ByteBuffer
+import android.content.ContentValues         // For creating file metadata
+import android.provider.MediaStore          // For accessing device photo storage
+import android.os.Build                     // For Android version checking
+import androidx.camera.core.ImageCapture    // For file-based photo capture
+import java.text.SimpleDateFormat          // For creating unique filenames
+import java.util.Locale                    // For date formatting
 
 class MainActivity : ComponentActivity() {
 
@@ -154,37 +160,91 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun takePhoto(controller: LifecycleCameraController, onPhotoTaken: (Bitmap) -> Unit) {
-        controller.takePicture(
-            ContextCompat.getMainExecutor(applicationContext),
-            object: OnImageCapturedCallback() {
-                override fun onCaptureSuccess(image: ImageProxy) {
-                    super.onCaptureSuccess(image)
+//    private fun takePhoto(controller: LifecycleCameraController, onPhotoTaken: (Bitmap) -> Unit) {
+//        controller.takePicture(
+//            ContextCompat.getMainExecutor(applicationContext),
+//            object: OnImageCapturedCallback() {
+//                override fun onCaptureSuccess(image: ImageProxy) {
+//                    super.onCaptureSuccess(image)
+//
+//                    try {
+//                        val bitmap = imageProxyToBitmap(image)
+//                        onPhotoTaken(bitmap)
+//                    } catch (e: Exception) {
+//                        Log.e("Camera", "Error converting image to bitmap", e)
+//                    } finally {
+//                        image.close()
+//                    }
+//                }
+//
+//                override fun onError(exception: ImageCaptureException) {
+//                    super.onError(exception)
+//                    Log.e("Camera", "Couldn't take photo: ", exception)
+//                }
+//            }
+//        )
+//    }
 
-                    try {
-                        val bitmap = imageProxyToBitmap(image)
-                        onPhotoTaken(bitmap)
-                    } catch (e: Exception) {
-                        Log.e("Camera", "Error converting image to bitmap", e)
-                    } finally {
-                        image.close()
-                    }
+    private fun takePhoto(controller: LifecycleCameraController, onPhotoTaken: (Bitmap) -> Unit) {
+        // Step 5a: Create unique filename with timestamp
+        val name = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.UK)
+            .format(System.currentTimeMillis())
+
+        // Step 5b: Create file metadata
+        val contentValues = ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME, name)
+            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+            if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+                put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures")
+            }
+        }
+
+        // Step 5c: Configure where to save the file
+        val outputOptions = ImageCapture.OutputFileOptions.Builder(
+            contentResolver,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            contentValues
+        ).build()
+
+        // Step 5d: Take picture with file saving
+        controller.takePicture(
+            outputOptions,
+            ContextCompat.getMainExecutor(this),
+            object : ImageCapture.OnImageSavedCallback {
+                override fun onError(exception: ImageCaptureException) {
+                    Log.e("Camera", "Photo capture failed: ${exception.message}", exception)
                 }
 
-                override fun onError(exception: ImageCaptureException) {
-                    super.onError(exception)
-                    Log.e("Camera", "Couldn't take photo: ", exception)
+                override fun onImageSaved(output: ImageCapture.OutputFileResults) {
+                    Log.d("Camera", "Photo capture succeeded: ${output.savedUri}")
+
+                    // Step 5e: Load the saved image as bitmap
+                    output.savedUri?.let { uri ->
+                        try {
+                            val inputStream = contentResolver.openInputStream(uri)
+                            val bitmap = BitmapFactory.decodeStream(inputStream)
+                            inputStream?.close()
+
+                            if (bitmap != null) {
+                                onPhotoTaken(bitmap)
+                            } else {
+                                Log.e("Camera", "Failed to decode bitmap from saved image")
+                            }
+                        } catch (e: Exception) {
+                            Log.e("Camera", "Error loading saved image", e)
+                        }
+                    }
                 }
             }
         )
     }
 
-    private fun imageProxyToBitmap(image: ImageProxy): Bitmap {
-        val buffer: ByteBuffer = image.planes[0].buffer
-        val bytes = ByteArray(buffer.remaining())
-        buffer.get(bytes)
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-    }
+//    private fun imageProxyToBitmap(image: ImageProxy): Bitmap {
+//        val buffer: ByteBuffer = image.planes[0].buffer
+//        val bytes = ByteArray(buffer.remaining())
+//        buffer.get(bytes)
+//        return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+//    }
 
     private fun hasRequiredPermissions(): Boolean {
         return CAMERAX_PERMISSIONS.all {
@@ -198,7 +258,7 @@ class MainActivity : ComponentActivity() {
     companion object {
         private val CAMERAX_PERMISSIONS = arrayOf(
             Manifest.permission.CAMERA,
-            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
         )
     }
 }
