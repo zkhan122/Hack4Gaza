@@ -62,12 +62,28 @@ import android.os.Build                     // For Android version checking
 import androidx.camera.core.ImageCapture    // For file-based photo capture
 import java.text.SimpleDateFormat          // For creating unique filenames
 import java.util.Locale                    // For date formatting
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : ComponentActivity() {
+    private lateinit var skinDiseaseClassifier: SkinDiseaseClassifier
 
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        // Initialize ML classifier
+        skinDiseaseClassifier = SkinDiseaseClassifier(this)
+        lifecycleScope.launch(Dispatchers.IO) {
+            skinDiseaseClassifier.initializeInterpreter()
+            withContext(Dispatchers.Main) {
+                Log.d("MainActivity", "ML Model ready!")
+            }
+        }
+
+
         if (!hasRequiredPermissions()) {
             ActivityCompat.requestPermissions(
                 this, CAMERAX_PERMISSIONS, 0
@@ -160,30 +176,12 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-//    private fun takePhoto(controller: LifecycleCameraController, onPhotoTaken: (Bitmap) -> Unit) {
-//        controller.takePicture(
-//            ContextCompat.getMainExecutor(applicationContext),
-//            object: OnImageCapturedCallback() {
-//                override fun onCaptureSuccess(image: ImageProxy) {
-//                    super.onCaptureSuccess(image)
-//
-//                    try {
-//                        val bitmap = imageProxyToBitmap(image)
-//                        onPhotoTaken(bitmap)
-//                    } catch (e: Exception) {
-//                        Log.e("Camera", "Error converting image to bitmap", e)
-//                    } finally {
-//                        image.close()
-//                    }
-//                }
-//
-//                override fun onError(exception: ImageCaptureException) {
-//                    super.onError(exception)
-//                    Log.e("Camera", "Couldn't take photo: ", exception)
-//                }
-//            }
-//        )
-//    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        skinDiseaseClassifier.close()
+    }
+
 
     private fun takePhoto(controller: LifecycleCameraController, onPhotoTaken: (Bitmap) -> Unit) {
         // Step 5a: Create unique filename with timestamp
@@ -239,12 +237,6 @@ class MainActivity : ComponentActivity() {
         )
     }
 
-//    private fun imageProxyToBitmap(image: ImageProxy): Bitmap {
-//        val buffer: ByteBuffer = image.planes[0].buffer
-//        val bytes = ByteArray(buffer.remaining())
-//        buffer.get(bytes)
-//        return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-//    }
 
     private fun hasRequiredPermissions(): Boolean {
         return CAMERAX_PERMISSIONS.all {
