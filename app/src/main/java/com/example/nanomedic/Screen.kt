@@ -13,7 +13,12 @@ package com.example.nanomedic
 // 'object' keyword creates a Singleton. A singleton is a class that is guaranteed to have only one instance throughout the entire application. You don't need to create an instance of it with a constructor; you just use its name directly.
 
 sealed class Screen(val route: String) {
-    data object Camera : Screen("camera_screen")
-    data object Loading : Screen("loading_screen")
-    data object Guide : Screen("guide_screen")
+    object Camera : Screen("camera_screen")
+    object Loading : Screen("loading_screen")
+
+    // Guide route with placeholder
+    object Guide : Screen("guide_screen/{woundType}") {
+        // Helper function to create route with woundType param
+        fun createRoute(woundType: String) = "guide_screen/$woundType"
+    }
 }
