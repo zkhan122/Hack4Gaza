@@ -1,30 +1,3 @@
-//package com.example.nanomedic
-//
-//import android.graphics.Bitmap
-//import androidx.lifecycle.ViewModel
-//import kotlinx.coroutines.flow.MutableStateFlow
-//import kotlinx.coroutines.flow.asStateFlow
-//
-//class PhotoViewModel : ViewModel() {
-//    private val _capturedPhoto = MutableStateFlow<Bitmap?>(null)
-//    val capturedPhoto = _capturedPhoto.asStateFlow()
-//
-//    private val _mlResult = MutableStateFlow<String?>(null)
-//    val mlResult = _mlResult.asStateFlow()
-//
-//    fun setPhoto(bitmap: Bitmap) {
-//        _capturedPhoto.value = bitmap
-//    }
-//
-//    fun clearPhoto() {
-//        _capturedPhoto.value = null
-//        _mlResult.value = null
-//    }
-//
-//    fun setMLResult(result: String) {
-//        _mlResult.value = result
-//    }
-//}
 
 package com.example.nanomedic
 
