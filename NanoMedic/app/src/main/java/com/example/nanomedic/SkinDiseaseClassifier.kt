@@ -11,6 +11,8 @@ import java.nio.ByteOrder
 import java.nio.channels.FileChannel
 import androidx.core.graphics.scale
 
+
+
 class SkinDiseaseClassifier(private val context: Context) {
     private var interpreter: Interpreter? = null
     private var inputImageWidth: Int = 0
@@ -32,7 +34,14 @@ class SkinDiseaseClassifier(private val context: Context) {
         try {
             val assetManager = context.assets
             val model = loadModelFile(assetManager, "final_model.tflite")
-            interpreter = Interpreter(model)
+//            interpreter = Interpreter(model)
+            val options = Interpreter.Options().apply {
+                setNumThreads(4)
+                setUseNNAPI(true)
+                setUseXNNPACK(true)
+            }
+            interpreter = Interpreter(model, options)
+
 
             val inputShape = interpreter!!.getInputTensor(0).shape()
             inputImageWidth = inputShape[1]
