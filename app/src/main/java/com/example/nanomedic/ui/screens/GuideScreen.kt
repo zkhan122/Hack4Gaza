@@ -1,4 +1,4 @@
-package com.example.nanoMedic.ui.screens
+package com.example.nanomedic.ui.screens
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
