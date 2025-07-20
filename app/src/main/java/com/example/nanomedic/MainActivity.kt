@@ -17,7 +17,7 @@ import com.example.nanomedic.ui.theme.NanoMedicTheme
 // 'MainActivity' class is the main entry point to the entire application.
 // 'MainActivity' is the name given by default to the first screen that loads when a user launches your app.
 // 'ComponentActivity' provides all the basic functionality a screen needs (like handling user input, managing its lifecycle, etc.).
-class MainActivity : ComponentActivity() {
+class   MainActivity : ComponentActivity() {
     // 'onCreate' is called when the screen is created. This is like a constructor for a class.
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
