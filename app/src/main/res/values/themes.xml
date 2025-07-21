@@ -1,0 +1,13 @@
+<!-- In res/values/themes.xml -->
+<resources>
+
+    <style name="Theme.NanoMedic" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_nanomedic_logo</item>
+
+        <item name="postSplashScreenTheme">@style/Theme.NanoMedic</item>
+    </style>
+</resources>

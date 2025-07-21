@@ -1,0 +1,187 @@
+[
+  {
+    "id": 1,
+    "wound-type": "Abrasions",
+    "treatment-eng": [
+      {
+        "Step-1": "Wash the wound gently with soap and water.",
+        "Step-2": "Use tweezers to remove any visible debris like pebbles. Use caution before removing any debris. If your wound contains a lot of debris like multiple or large pieces of gravel or glass, visit the emergency room (ER) and don’t try to remove the debris on your own.",
+        "Step-3": "Pat the wound dry after washing it. Use a clean washcloth to do this.",
+        "Step-4": "Apply a topical antibiotic ointment to the abrasion to prevent infection.",
+        "Step-5": "Cover your wound with a bandage or wound dressing. Small abrasions, like a linear abrasion less than 2 inches, may not need a bandage due to the size.",
+        "Step-6": "Clean and covering the wound daily until it heals. Use a new bandage each time."
+      }
+    ],
+    "treatment-arab": [
+      {
+        "Step-1": "اغسل الجرح بلطف باستخدام الماء والصابون.",
+        "Step-2": "استخدم الملقط لإزالة أي بقايا مرئية مثل الحصى. توخَّ الحذر عند إزالة أي بقايا. إذا كان الجرح يحتوي على الكثير من البقايا مثل قطع كبيرة أو متعددة من الحصى أو الزجاج، فاذهب إلى قسم الطوارئ ولا تحاول إزالتها بنفسك.",
+        "Step-3": "جفف الجرح بالتربيت بعد غسله. استخدم منشفة نظيفة للقيام بذلك.",
+        "Step-4": "ضع مرهمًا موضعيًا مضادًا حيويًا على الخدش لمنع العدوى.",
+        "Step-5": "غطِّ الجرح بضمادة أو لاصق طبي. قد لا تحتاج الخدوش الصغيرة، مثل الخدش الخطي الذي يقل عن بوصتين، إلى تغطية بسبب الحجم.",
+        "Step-6": "نظف الجرح وقم بتغطيته يوميًا حتى يلتئم. استخدم ضمادة جديدة في كل مرة."
+      }
+    ],
+    "identification-eng": "Dark around the borders, often red from blood, shiny, wet",
+    "identification-arab": "داكن حول الحدود، غالبًا أحمر اللون بسبب الدم، لامع، رطب"
+  },
+
+  {
+    "id": 2,
+    "wound-type": "Bruises",
+    "treatment-eng": [
+      {
+        "Step-1": "Apply a cold compress or ice pack to the bruised area for 15-20 minutes to reduce swelling.",
+        "Step-2": "Elevate the bruised area, if possible, to reduce blood flow and minimize discoloration.",
+        "Step-3": "Rest the bruised area and avoid strenuous activity to allow healing.",
+        "Step-4": "After 48 hours, you can apply a warm compress to increase blood flow and help the bruise heal faster.",
+        "Step-5": "Use over-the-counter pain relief like acetaminophen if there’s pain. Avoid aspirin or ibuprofen if there's a risk of increased bleeding.",
+        "Step-6": "Monitor the bruise. If it doesn't improve after a couple of weeks or worsens, seek medical attention."
+      }
+    ],
+    "treatment-arab": [
+      {
+        "Step-1": "ضع كمادة باردة أو كيس ثلج على المنطقة المصابة بالكدمة لمدة 15-20 دقيقة لتقليل التورم.",
+        "Step-2": "ارفع المنطقة المصابة بالكدمة إن أمكن، لتقليل تدفق الدم والحد من تغير اللون.",
+        "Step-3": "أرح المنطقة المصابة وتجنب الأنشطة الشاقة للسماح بالشفاء.",
+        "Step-4": "بعد 48 ساعة، يمكنك وضع كمادة دافئة لزيادة تدفق الدم والمساعدة في سرعة الشفاء.",
+        "Step-5": "استخدم مسكنات الألم المتوفرة بدون وصفة طبية مثل الباراسيتامول إذا كان هناك ألم. تجنب الأسبرين أو الإيبوبروفين إذا كان هناك خطر نزيف.",
+        "Step-6": "راقب الكدمة. إذا لم تتحسن بعد أسبوعين أو ساءت، فاطلب الرعاية الطبية."
+      }
+    ],
+    "identification-eng": "Discolored skin (purple, blue, or black) without open wounds, tenderness, and mild swelling",
+    "identification-arab": "تغير لون الجلد (أرجواني، أزرق، أو أسود) دون وجود جروح مفتوحة، مع ألم عند اللمس وتورم خفيف"
+  },
+
+  {
+    "id": 3,
+    "wound-type": "Burns",
+    "treatment-eng": [
+      {
+        "Step-1": "Cool the burn under cool (not cold) running water for 10-20 minutes.",
+        "Step-2": "Remove any tight items, such as rings or clothing, from the burned area.",
+        "Step-3": "Avoid applying ice, butter, or oily substances to the burn.",
+        "Step-4": "Cover the burn with a sterile, non-stick bandage or clean cloth.",
+        "Step-5": "Take over-the-counter pain relievers if needed.",
+        "Step-6": "Seek medical help for large, deep, or blistering burns, especially on the face, hands, or genitals."
+      }
+    ],
+    "treatment-arab": [
+      {
+        "Step-1": "قم بتبريد الحرق تحت ماء جارٍ بارد (وليس مثلجًا) لمدة 10-20 دقيقة.",
+        "Step-2": "أزل أي عناصر ضيقة مثل الخواتم أو الملابس من منطقة الحرق.",
+        "Step-3": "تجنب وضع الثلج أو الزبدة أو المواد الدهنية على الحرق.",
+        "Step-4": "غطِّ الحرق بضمادة معقمة غير لاصقة أو قطعة قماش نظيفة.",
+        "Step-5": "تناول مسكنات الألم المتاحة بدون وصفة طبية إذا لزم الأمر.",
+        "Step-6": "اطلب العناية الطبية للحروق الكبيرة أو العميقة أو المصحوبة ببثور، خاصةً في الوجه أو اليدين أو الأعضاء التناسلية."
+      }
+    ],
+    "identification-eng": "Red, swollen, blistered, or charred skin, often painful to the touch",
+    "identification-arab": "جلد أحمر أو متورم أو به بثور أو متفحم، وغالبًا ما يكون مؤلمًا عند اللمس"
+  },
+  {
+    "id": 4,
+    "wound-type": "Cut",
+    "treatment-eng": [
+      {
+        "Step-1": "Stop the bleeding by applying pressure with a clean cloth or bandage.",
+        "Step-2": "Rinse the cut with clean water to remove debris.",
+        "Step-3": "Wash around the cut gently with soap and water.",
+        "Step-4": "Apply antibiotic ointment to prevent infection.",
+        "Step-5": "Cover the cut with a sterile bandage.",
+        "Step-6": "Change the bandage daily and monitor for signs of infection."
+      }
+    ],
+    "treatment-arab": [
+      {
+        "Step-1": "أوقف النزيف بالضغط باستخدام قطعة قماش نظيفة أو ضمادة.",
+        "Step-2": "اشطف الجرح بالماء النظيف لإزالة الشوائب.",
+        "Step-3": "اغسل المنطقة حول الجرح بلطف باستخدام الماء والصابون.",
+        "Step-4": "ضع مرهمًا مضادًا حيويًا لمنع العدوى.",
+        "Step-5": "غطِّ الجرح بضمادة معقمة.",
+        "Step-6": "غيّر الضمادة يوميًا وراقب علامات العدوى."
+      }
+    ],
+    "identification-eng": "Open wound with bleeding, may be shallow or deep with sharp edges",
+    "identification-arab": "جرح مفتوح مع نزيف، قد يكون سطحيًا أو عميقًا بحواف حادة"
+  },
+  {
+    "id": 5,
+    "wound-type": "Ingrown_Nails",
+    "treatment-eng": [
+      {
+        "Step-1": "Soak the affected toe or finger in warm, soapy water for 15-20 minutes.",
+        "Step-2": "Gently lift the edge of the nail and place a small piece of cotton or dental floss underneath.",
+        "Step-3": "Apply antibiotic ointment to prevent infection.",
+        "Step-4": "Keep the area clean and dry when not soaking.",
+        "Step-5": "Wear open-toed shoes or avoid tight footwear to reduce pressure.",
+        "Step-6": "Consult a doctor if there's severe pain, swelling, or signs of infection."
+      }
+    ],
+    "treatment-arab": [
+      {
+        "Step-1": "انقع الإصبع أو إصبع القدم المصاب في ماء دافئ وصابوني لمدة 15-20 دقيقة.",
+        "Step-2": "ارفع حافة الظفر بلطف وضع قطعة صغيرة من القطن أو خيط الأسنان أسفله.",
+        "Step-3": "ضع مرهمًا مضادًا حيويًا لمنع العدوى.",
+        "Step-4": "حافظ على نظافة المنطقة وجفافها عند عدم النقع.",
+        "Step-5": "ارتدِ أحذية مفتوحة من الأمام أو تجنب الأحذية الضيقة لتقليل الضغط.",
+        "Step-6": "استشر الطبيب إذا كان هناك ألم شديد أو تورم أو علامات عدوى."
+      }
+    ],
+    "identification-eng": "Red, swollen skin around the nail, may have pus or be painful to touch",
+    "identification-arab": "جلد أحمر ومتورم حول الظفر، وقد يحتوي على صديد أو يكون مؤلمًا عند اللمس"
+  },
+  {
+    "id": 6,
+    "wound-type": "Laceration",
+    "treatment-eng": [
+      {
+        "Step-1": "Apply firm pressure with a clean cloth to stop bleeding.",
+        "Step-2": "Rinse the wound with water and remove debris.",
+        "Step-3": "Clean the area around the laceration with soap and water.",
+        "Step-4": "Apply an antibiotic ointment.",
+        "Step-5": "Cover the laceration with a sterile bandage.",
+        "Step-6": "Seek medical attention if the wound is deep, long, or has jagged edges."
+      }
+    ],
+    "treatment-arab": [
+      {
+        "Step-1": "اضغط بقوة باستخدام قطعة قماش نظيفة لإيقاف النزيف.",
+        "Step-2": "اشطف الجرح بالماء وأزل الحطام.",
+        "Step-3": "نظف المنطقة المحيطة بالتمزق بالماء والصابون.",
+        "Step-4": "ضع مرهمًا مضادًا حيويًا.",
+        "Step-5": "غطِّ التمزق بضمادة معقمة.",
+        "Step-6": "اطلب العناية الطبية إذا كان الجرح عميقًا أو طويلًا أو بحواف ممزقة."
+      }
+    ],
+    "identification-eng": "Deep cut or tear in the skin with irregular or jagged edges",
+    "identification-arab": "قطع عميق أو تمزق في الجلد بحواف غير منتظمة أو ممزقة"
+  },
+  {
+    "id": 7,
+    "wound-type": "Stab_Wound",
+    "treatment-eng": [
+      {
+        "Step-1": "Do not remove the object if it's still in the wound; stabilize it.",
+        "Step-2": "Call emergency services immediately.",
+        "Step-3": "Apply pressure around the wound to control bleeding.",
+        "Step-4": "Keep the person lying down and calm.",
+        "Step-5": "Do not clean deep stab wounds; leave it for medical professionals.",
+        "Step-6": "Cover the wound with a sterile dressing if possible, and wait for help."
+      }
+    ],
+    "treatment-arab": [
+      {
+        "Step-1": "لا تقم بإزالة الجسم إذا كان لا يزال في الجرح؛ ثبّته في مكانه.",
+        "Step-2": "اتصل بخدمات الطوارئ فورًا.",
+        "Step-3": "اضغط حول الجرح للسيطرة على النزيف.",
+        "Step-4": "اجعل المصاب مستلقيًا وهادئًا.",
+        "Step-5": "لا تنظف الجروح الطعنية العميقة؛ اتركها للمهنيين الطبيين.",
+        "Step-6": "غطِّ الجرح بضمادة معقمة إن أمكن، وانتظر المساعدة."
+      }
+    ],
+    "identification-eng": "Puncture wound caused by a sharp object, may be deep with little external bleeding",
+    "identification-arab": "جرح ناتج عن طعنة بواسطة جسم حاد، قد يكون عميقًا مع نزيف خارجي طفيف"
+  }
+
+]
