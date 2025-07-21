@@ -1,3 +1,4 @@
+
 package com.example.nanomedic.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
@@ -8,18 +9,30 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.delay
+import com.example.nanomedic.PhotoViewModel
 
 @Composable
-fun LoadingScreen(onNavigateToGuide : () -> Unit) {
-    // Safely run side-effects like timers or network calls when a composable first appears on screen.
-    // The key `true` means this effect will only run ONCE.
+fun LoadingScreen(onNavigateToGuide: (String) -> Unit, photoViewModel: PhotoViewModel) {
+
+    val classificationResult by photoViewModel.classificationResult.collectAsState()
+    val isClassifying by photoViewModel.isClassifying.collectAsState()
+
+    // Start classification when screen loads
     LaunchedEffect(key1 = true) {
-        delay(2000) // Simulate a 2-second network or processing delay.
-        onNavigateToGuide() // After the delay, trigger the navigation.
+        photoViewModel.classifyPhoto()
+    }
+
+    // Navigate when classification is complete
+    LaunchedEffect(classificationResult) {
+        classificationResult?.let { result ->
+            // Navigate with the predicted wound type
+            onNavigateToGuide(result.predictedClass)
+        }
     }
 
     Column(
@@ -28,6 +41,9 @@ fun LoadingScreen(onNavigateToGuide : () -> Unit) {
         verticalArrangement = Arrangement.Center
     ) {
         CircularProgressIndicator()
-        Text(text = "Processing...", modifier = Modifier.padding(top = 16.dp))
+        Text(
+            text = if (isClassifying) "Analyzing wound..." else "Processing...",
+            modifier = Modifier.padding(top = 16.dp)
+        )
     }
 }

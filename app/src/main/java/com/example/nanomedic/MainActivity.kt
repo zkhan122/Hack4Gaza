@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -12,12 +13,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.nanomedic.ml.WoundClassifier
 import com.example.nanomedic.ui.theme.NanoMedicTheme
 
 // 'MainActivity' class is the main entry point to the entire application.
 // 'MainActivity' is the name given by default to the first screen that loads when a user launches your app.
 // 'ComponentActivity' provides all the basic functionality a screen needs (like handling user input, managing its lifecycle, etc.).
 class   MainActivity : ComponentActivity() {
+
+    private val photoViewModel: PhotoViewModel by viewModels()
+    private lateinit var woundClassifier: WoundClassifier
+
     // 'onCreate' is called when the screen is created. This is like a constructor for a class.
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -25,6 +31,9 @@ class   MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         enableEdgeToEdge()
+        // Initialize ML classifier
+        woundClassifier = WoundClassifier(this)
+        photoViewModel.initializeClassifier(woundClassifier)
 
         // 'setContent' renders the below UI inside this screen.
         setContent {
@@ -42,7 +51,7 @@ class   MainActivity : ComponentActivity() {
 //                    )
 //                }
 
-                Navigation()
+                Navigation(photoViewModel = photoViewModel)
             }
         }
     }

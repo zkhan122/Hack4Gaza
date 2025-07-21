@@ -62,6 +62,8 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation("com.google.code.gson:gson:2.13.1")
     implementation(libs.tensorflow.lite)
+    implementation("org.tensorflow:tensorflow-lite:2.14.0")
+    implementation("org.tensorflow:tensorflow-lite-support:0.4.4")
     implementation(libs.splash.screen)
     implementation(libs.androidx.camera.core)
     implementation(libs.androidx.camera.camera2)
