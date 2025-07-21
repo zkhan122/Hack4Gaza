@@ -9,6 +9,10 @@ This app is meant for medical students and civilians who don’t have little or 
 ## Slides:
 https://docs.google.com/presentation/d/16jh6SIVWL04Z3R2Rfi_OWlUlYU3woWE1Yc35_AK3g9Q/edit?usp=sharing
 
+## Tech Stack:
+- Machine learning model: Tensorflow, Keras (trained on GPU initially then moved to TPU training on Colab and Kaggle)
+- Mobile App: Kotlin, Android studio
+
 
 ## Team:
 Zayaan Khan -> development of classification ML model based on wound dataset, export to .tflite model + optimizations added, json guide lookups/formatting + app logo
